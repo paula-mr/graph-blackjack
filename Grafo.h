@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <vector>
+#include "Pessoa.h"
 
 using namespace std;
 
@@ -12,8 +13,8 @@ class Grafo {
 
         Grafo(int n);
         ~Grafo();
-        void adicionarAdjacencia(vector<int> adjacencias[], int u, int v);
-        void imprimirGrafo(vector<int> adjacencias[]);
+        void adicionarAdjacencia(Pessoa adjacencias[], int u, int v);
+        void imprimirGrafo(Pessoa adjacencias[]);
 };
 
 #endif

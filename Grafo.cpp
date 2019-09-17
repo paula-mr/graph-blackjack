@@ -9,16 +9,14 @@ Grafo::Grafo(int n) {
 
 Grafo::~Grafo() = default;
 
-void Grafo::adicionarAdjacencia(vector<int> adjacencias[], int u, int v) {
-    adjacencias[u].push_back(v);
-    adjacencias[v].push_back(u);
-
+void Grafo::adicionarAdjacencia(Pessoa adjacencias[], int u, int v) {
+    adjacencias[u].comandados.push_back(v);
 }
 
-void Grafo::imprimirGrafo(vector<int> adjacencias[]) {
+void Grafo::imprimirGrafo(Pessoa adjacencias[]) {
     for (int v = 0; v < this->tamanho; ++v) {
         cout << v;
-        for (auto x : adjacencias[v])
+        for (auto x : adjacencias[v].comandados)
            cout << "-> " << x;
         printf("\n");
     }
