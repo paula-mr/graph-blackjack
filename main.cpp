@@ -1,5 +1,6 @@
 #include "Grafo.h"
 #include "Pessoa.h"
+#include "Orquestrador.h"
 
 void receberPessoas(Pessoa pessoas[], int qtdPessoas);
 void receberRelacionamentos(Grafo grafo, int qtdRelacoes);
@@ -17,6 +18,8 @@ int main() {
     receberRelacionamentos(grafo, qtdRelacoes);
 
     grafo.imprimir();
+
+    commander(grafo, 2);
 
     return 0;
 }

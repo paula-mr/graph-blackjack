@@ -1,8 +1,8 @@
 #ifndef ORQUESTRADOR_H
 #define ORQUESTRADOR_H
 
-#include "Pessoa.h"
+#include "Grafo.h"
 
-void commander(Pessoa adjacencias[]);
+void commander(Grafo grafo, int aluno);
 
 #endif

@@ -8,10 +8,9 @@
 using namespace std;
 
 class Grafo {
-    private:
-        int tamanho;
 
     public:
+        int tamanho;
         Pessoa* adjacencias;
 
         Grafo(int n, Pessoa* adjacencias);
