@@ -3,17 +3,26 @@
 
 int main() {
 
-    int tamanho = 5;
-    Pessoa pessoas[tamanho];
+    int qtdPessoas, qtdRelacoes, qtdInstrucoes;
 
-    Grafo grafo = Grafo(tamanho);
-    grafo.adicionarAdjacencia(pessoas, 0, 1);
-    grafo.adicionarAdjacencia(pessoas, 0, 4);
-    grafo.adicionarAdjacencia(pessoas, 1, 2);
-    grafo.adicionarAdjacencia(pessoas, 1, 3);
-    grafo.adicionarAdjacencia(pessoas, 1, 4);
-    grafo.adicionarAdjacencia(pessoas, 2, 3);
-    grafo.adicionarAdjacencia(pessoas, 3, 4);
+    std::cin >> qtdPessoas >> qtdRelacoes >> qtdInstrucoes;
+
+    Pessoa pessoas[qtdPessoas];
+
+    for (int i=0; i < qtdPessoas; i++) {
+        int idade;
+        std::cin >> idade;
+        pessoas[i+1].idade = idade;
+    }
+
+    Grafo grafo = Grafo(qtdPessoas);
+
+    for (int i=0; i < qtdRelacoes; i++) {
+        int lider, comandado;
+        std::cin >> lider >> comandado;
+
+        grafo.adicionarAdjacencia(pessoas, lider, comandado);
+    }
 
     grafo.imprimirGrafo(pessoas);
 

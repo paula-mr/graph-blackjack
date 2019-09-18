@@ -15,8 +15,9 @@ void Grafo::adicionarAdjacencia(Pessoa adjacencias[], int u, int v) {
 
 void Grafo::imprimirGrafo(Pessoa adjacencias[]) {
     for (int v = 0; v < this->tamanho; ++v) {
+        cout << "IDADE " << adjacencias[v+1].idade << " ";
         cout << v;
-        for (auto x : adjacencias[v].comandados)
+        for (auto x : adjacencias[v+1].comandados)
            cout << "-> " << x;
         printf("\n");
     }
