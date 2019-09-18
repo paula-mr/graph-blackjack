@@ -19,7 +19,7 @@ int main() {
 
     grafo.imprimir();
 
-    commander(grafo, 2);
+    commander(grafo, 1);
 
     return 0;
 }
