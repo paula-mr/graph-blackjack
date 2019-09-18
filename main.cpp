@@ -4,6 +4,8 @@
 
 void receberPessoas(Pessoa pessoas[], int qtdPessoas);
 void receberRelacionamentos(Grafo grafo, int qtdRelacoes);
+void receberComandos(Grafo grafo, int qtdInstrucoes);
+void executarCommander(Grafo grafo);
 
 int main() {
 
@@ -19,7 +21,7 @@ int main() {
 
     grafo.imprimir();
 
-    commander(grafo, 1);
+    receberComandos(grafo, qtdInstrucoes);
 
     return 0;
 }
@@ -39,4 +41,24 @@ void receberRelacionamentos(Grafo grafo, int qtdRelacoes) {
 
         grafo.adicionarAdjacencia(lider, comandado);
     }
+}
+
+void receberComandos(Grafo grafo, int qtdInstrucoes) {
+    for (int i=0; i < qtdInstrucoes; i++) {
+        char comando;
+        std::cin >> comando;
+
+        switch(comando) {
+            case 'C':
+                executarCommander(grafo);
+                break;
+        }
+    }
+}
+
+void executarCommander(Grafo grafo) {
+    int aluno;
+    std::cin >> aluno;
+
+    commander(grafo, aluno);
 }

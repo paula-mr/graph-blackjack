@@ -46,6 +46,8 @@ void commander(Grafo grafo, int aluno) {
         }
     }
 
+    std::cout << endl << "C ";
+
     if (liderMaisNovo == -1 || liderMaisNovo == aluno) {
         std::cout << "*";
     } else {
