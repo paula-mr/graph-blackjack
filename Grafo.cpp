@@ -3,17 +3,18 @@
 
 #include "Grafo.h"
 
-Grafo::Grafo(int n) {
+Grafo::Grafo(int n, Pessoa* adjacencias) {
     this->tamanho = n;
+    this->adjacencias = adjacencias;
 }
 
 Grafo::~Grafo() = default;
 
-void Grafo::adicionarAdjacencia(Pessoa adjacencias[], int u, int v) {
+void Grafo::adicionarAdjacencia(int u, int v) {
     adjacencias[u].comandados.push_back(v);
 }
 
-void Grafo::imprimirGrafo(Pessoa adjacencias[]) {
+void Grafo::imprimir() {
     for (int v = 0; v < this->tamanho; ++v) {
         cout << "IDADE " << adjacencias[v+1].idade << " ";
         cout << v+1;

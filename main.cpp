@@ -2,7 +2,7 @@
 #include "Pessoa.h"
 
 void receberPessoas(Pessoa pessoas[], int qtdPessoas);
-void receberRelacionamentos(Grafo grafo, Pessoa pessoas[], int qtdRelacoes);
+void receberRelacionamentos(Grafo grafo, int qtdRelacoes);
 
 int main() {
 
@@ -10,13 +10,13 @@ int main() {
 
     std::cin >> qtdPessoas >> qtdRelacoes >> qtdInstrucoes;
 
-    Pessoa pessoas[qtdPessoas];
+    Pessoa pessoas[qtdPessoas+1];
     receberPessoas(pessoas, qtdPessoas);
 
-    Grafo grafo = Grafo(qtdPessoas);
-    receberRelacionamentos(grafo, pessoas, qtdRelacoes);
+    Grafo grafo = Grafo(qtdPessoas, pessoas);
+    receberRelacionamentos(grafo, qtdRelacoes);
 
-    grafo.imprimirGrafo(pessoas);
+    grafo.imprimir();
 
     return 0;
 }
@@ -29,11 +29,11 @@ void receberPessoas(Pessoa pessoas[], int qtdPessoas) {
     }
 }
 
-void receberRelacionamentos(Grafo grafo, Pessoa pessoas[], int qtdRelacoes) {
+void receberRelacionamentos(Grafo grafo, int qtdRelacoes) {
     for (int i=0; i < qtdRelacoes; i++) {
         int lider, comandado;
         std::cin >> lider >> comandado;
 
-        grafo.adicionarAdjacencia(pessoas, lider, comandado);
+        grafo.adicionarAdjacencia(lider, comandado);
     }
 }

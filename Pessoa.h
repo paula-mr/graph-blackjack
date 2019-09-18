@@ -3,6 +3,8 @@
 
 using namespace std;
 
+#include <vector>
+
 class Pessoa {
     public:
         int idade;

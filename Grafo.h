@@ -8,13 +8,16 @@
 using namespace std;
 
 class Grafo {
-    public:
+    private:
         int tamanho;
 
-        Grafo(int n);
+    public:
+        Pessoa* adjacencias;
+
+        Grafo(int n, Pessoa* adjacencias);
         ~Grafo();
-        void adicionarAdjacencia(Pessoa adjacencias[], int u, int v);
-        void imprimirGrafo(Pessoa adjacencias[]);
+        void adicionarAdjacencia(int u, int v);
+        void imprimir();
 };
 
 #endif
