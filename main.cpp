@@ -21,7 +21,8 @@ int main() {
 
     grafo.imprimir();
 
-    receberComandos(grafo, qtdInstrucoes);
+    //receberComandos(grafo, qtdInstrucoes);
+    meeting(grafo);
 
     return 0;
 }

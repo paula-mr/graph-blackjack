@@ -1,5 +1,6 @@
 #include "Orquestrador.h"
 
+#include <stack>
 #include <list>
 #include <iterator>
 #include <algorithm>
@@ -7,12 +8,39 @@
 
 void inverterGrafo(Grafo grafo, Grafo transposto, int tamanho);
 void inicializarListaVisitados(bool* visitado, int tamanho);
+void inicializarPilhaTopologica(int aluno, bool* visitado, Grafo grafo, stack<int>* pilha);
 
 void meeting(Grafo grafo) {
+    stack<int> pilha;
     bool visitado[grafo.tamanho];
+
     inicializarListaVisitados(visitado, grafo.tamanho);
 
+    for (int i=0; i < grafo.tamanho; i++) {
+        if (!visitado[i]) {
+            inicializarPilhaTopologica(i, visitado, grafo, &pilha);
+        }
+    }
 
+    while (!pilha.empty()) {
+        std::cout << pilha.top() << " ";
+        pilha.pop();
+    }
+
+    std::cout << endl;
+
+}
+
+void inicializarPilhaTopologica(int aluno, bool* visitado, Grafo grafo, stack<int>* pilha) {
+    visitado[aluno] = true;
+
+    for (auto i : grafo.adjacencias[aluno].comandados) {
+        if (!visitado[i]) {
+            inicializarPilhaTopologica(i, visitado, grafo, pilha);
+        }
+    }
+
+    pilha->push(aluno);
 }
 
 void commander(Grafo grafo, int aluno) {
@@ -62,7 +90,7 @@ void inicializarListaVisitados(bool* visitado, int tamanho) {
 
 void inverterGrafo(Grafo grafo, Grafo transposto, int tamanho)  {
     for (int i = 1; i < tamanho; i++) {
-        for (int j = 0; j < grafo.adjacencias[i].comandados.size(); j++) {
+        for (unsigned int j = 0; j < grafo.adjacencias[i].comandados.size(); j++) {
             transposto.adicionarAdjacencia(grafo.adjacencias[i].comandados[j], i);
         }
 
