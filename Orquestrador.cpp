@@ -14,35 +14,35 @@ void imprimirPilha(stack<int>* pilha);
 bool verificarCiclo(Grafo grafo);
 bool verificarVerticesAdjacentes(int aluno, bool* visitado, bool* pilhaRecursao, Grafo grafo);
 bool contem(vector<int> lista, int item);
+void realizarTroca(Grafo grafo, int aluno1, int aluno2);
 
 void swap(Grafo grafo, int aluno1, int aluno2) {
+    int comandante, comandado;
+
     if (contem(grafo.adjacencias[aluno1].comandados, aluno2)) {
-        grafo.removerAdjacencia(aluno1, aluno2);
-        grafo.adicionarAdjacencia(aluno2, aluno1);
-
-        if (verificarCiclo(grafo)) {
-            grafo.removerAdjacencia(aluno2, aluno1);
-            grafo.adicionarAdjacencia(aluno1, aluno2);
-
-            std::cout << "S N" << std::endl;
-        } else {
-            std::cout << "S T" << std::endl;
-        }
+        comandante = aluno1;
+        comandado = aluno2;
     } else if (contem(grafo.adjacencias[aluno2].comandados, aluno1)) {
-        grafo.removerAdjacencia(aluno2, aluno1);
-        grafo.adicionarAdjacencia(aluno1, aluno2);
-
-        if (verificarCiclo(grafo)) {
-            grafo.removerAdjacencia(aluno1, aluno2);
-            grafo.adicionarAdjacencia(aluno2, aluno1);
-
-            std::cout << "S N" << std::endl;
-        } else {
-            std::cout << "S T" << std::endl;
-        }
+        comandante = aluno2;
+        comandado = aluno1;
     } else {
         std::cout << "S N" << std::endl;
+        return;
     }
+
+    realizarTroca(grafo, comandante, comandado);
+
+    if (verificarCiclo(grafo)) {
+        realizarTroca(grafo, comandado, comandante);
+        std::cout << "S N" << std::endl;
+    } else {
+        std::cout << "S T" << std::endl;
+    }
+}
+
+void realizarTroca(Grafo grafo, int aluno1, int aluno2) {
+    grafo.removerAdjacencia(aluno1, aluno2);
+    grafo.adicionarAdjacencia(aluno2, aluno1);
 }
 
 bool contem(vector<int> lista, int item) {
