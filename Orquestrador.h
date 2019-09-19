@@ -4,5 +4,6 @@
 #include "Grafo.h"
 
 void commander(Grafo grafo, int aluno);
+void meeting(Grafo grafo);
 
 #endif

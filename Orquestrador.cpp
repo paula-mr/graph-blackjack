@@ -6,22 +6,26 @@
 #include "Pessoa.h"
 
 void inverterGrafo(Grafo grafo, Grafo transposto, int tamanho);
+void inicializarListaVisitados(bool* visitado, int tamanho);
+
+void meeting(Grafo grafo) {
+    bool visitado[grafo.tamanho];
+    inicializarListaVisitados(visitado, grafo.tamanho);
+
+
+}
 
 void commander(Grafo grafo, int aluno) {
     int liderMaisNovo = -1, menorIdade = 1000;
-
+    bool visitado[grafo.tamanho];
+    list<int> fila;
     Pessoa pessoas[grafo.tamanho+1];
     Grafo transposto = Grafo(grafo.tamanho, pessoas);
+
     inverterGrafo(grafo, transposto, grafo.tamanho+1);
-
-    bool visitado[grafo.tamanho];
-    for (int i=0; i < grafo.tamanho; i++) {
-        visitado[i+1] = false;
-    }
-
+    inicializarListaVisitados(visitado, grafo.tamanho);
     visitado[aluno] = true;
 
-    list<int> fila;
     fila.push_back(aluno);
 
     int iterador;
@@ -42,12 +46,17 @@ void commander(Grafo grafo, int aluno) {
         }
     }
 
-    std::cout << endl << "C ";
 
     if (liderMaisNovo == -1 || liderMaisNovo == aluno) {
-        std::cout << "*";
+        std::cout << "C *" << endl;
     } else {
-        std::cout << liderMaisNovo;
+        std::cout << "C " << liderMaisNovo << endl;
+    }
+}
+
+void inicializarListaVisitados(bool* visitado, int tamanho) {
+    for (int i=0; i < tamanho; i++) {
+        visitado[i+1] = false;
     }
 }
 
