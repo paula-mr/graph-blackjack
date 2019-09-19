@@ -16,7 +16,7 @@ void meeting(Grafo grafo) {
 
     inicializarListaVisitados(visitado, grafo.tamanho);
 
-    for (int i=0; i < grafo.tamanho; i++) {
+    for (int i=1; i < grafo.tamanho+1; i++) {
         if (!visitado[i]) {
             inicializarPilhaTopologica(i, visitado, grafo, &pilha);
         }
