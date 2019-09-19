@@ -53,6 +53,10 @@ void receberComandos(Grafo grafo, int qtdInstrucoes) {
             case 'C':
                 executarCommander(grafo);
                 break;
+
+            case 'M':
+                meeting(grafo);
+                break;
         }
     }
 }
