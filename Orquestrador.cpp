@@ -8,39 +8,48 @@
 
 void inverterGrafo(Grafo grafo, Grafo transposto, int tamanho);
 void inicializarListaVisitados(bool* visitado, int tamanho);
-void inicializarPilhaTopologica(int aluno, bool* visitado, Grafo grafo, stack<int>* pilha);
+void inserirPilhaTopologica(int aluno, bool* visitado, Grafo grafo, stack<int>* pilha);
+void iniciarPilha(bool* visitado, Grafo grafo, stack<int>* pilha);
+void imprimirPilha(stack<int>* pilha);
 
 void meeting(Grafo grafo) {
     stack<int> pilha;
     bool visitado[grafo.tamanho];
 
     inicializarListaVisitados(visitado, grafo.tamanho);
+    iniciarPilha(visitado, grafo, &pilha);
 
-    for (int i=1; i < grafo.tamanho+1; i++) {
-        if (!visitado[i]) {
-            inicializarPilhaTopologica(i, visitado, grafo, &pilha);
-        }
-    }
-
-    while (!pilha.empty()) {
-        std::cout << pilha.top() << " ";
-        pilha.pop();
-    }
-
-    std::cout << endl;
+    imprimirPilha(&pilha);
 
 }
 
-void inicializarPilhaTopologica(int aluno, bool* visitado, Grafo grafo, stack<int>* pilha) {
+void iniciarPilha(bool* visitado, Grafo grafo, stack<int>* pilha) {
+    for (int i=1; i < grafo.tamanho+1; i++) {
+        if (!visitado[i]) {
+            inserirPilhaTopologica(i, visitado, grafo, pilha);
+        }
+    }
+}
+
+void inserirPilhaTopologica(int aluno, bool* visitado, Grafo grafo, stack<int>* pilha) {
     visitado[aluno] = true;
 
     for (auto i : grafo.adjacencias[aluno].comandados) {
         if (!visitado[i]) {
-            inicializarPilhaTopologica(i, visitado, grafo, pilha);
+            inserirPilhaTopologica(i, visitado, grafo, pilha);
         }
     }
 
     pilha->push(aluno);
+}
+
+void imprimirPilha(stack<int>* pilha) {
+    while (!pilha->empty()) {
+        std::cout << pilha->top() << " ";
+        pilha->pop();
+    }
+
+    std::cout << endl;
 }
 
 void commander(Grafo grafo, int aluno) {
