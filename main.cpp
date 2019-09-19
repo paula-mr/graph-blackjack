@@ -6,6 +6,7 @@ void receberPessoas(Pessoa pessoas[], int qtdPessoas);
 void receberRelacionamentos(Grafo grafo, int qtdRelacoes);
 void receberComandos(Grafo grafo, int qtdInstrucoes);
 void executarCommander(Grafo grafo);
+void executarSwap(Grafo grafo);
 
 int main() {
 
@@ -56,6 +57,10 @@ void receberComandos(Grafo grafo, int qtdInstrucoes) {
             case 'M':
                 meeting(grafo);
                 break;
+
+            case 'S':
+                executarSwap(grafo);
+                break;
         }
     }
 }
@@ -65,4 +70,11 @@ void executarCommander(Grafo grafo) {
     std::cin >> aluno;
 
     commander(grafo, aluno);
+}
+
+void executarSwap(Grafo grafo) {
+    int aluno1, aluno2;
+    std::cin >> aluno1 >> aluno2;
+
+    swap(grafo, aluno1, aluno2);
 }

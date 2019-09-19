@@ -14,6 +14,10 @@ void Grafo::adicionarAdjacencia(int u, int v) {
     adjacencias[u].comandados.push_back(v);
 }
 
+void Grafo::removerAdjacencia(int u, int v) {
+    adjacencias[u].comandados.erase(std::remove(adjacencias[u].comandados.begin(), adjacencias[u].comandados.end(), v), adjacencias[u].comandados.end());
+}
+
 void Grafo::imprimir() {
     for (int v = 0; v < this->tamanho; ++v) {
         cout << "IDADE " << adjacencias[v+1].idade << " ";
