@@ -29,10 +29,7 @@ void commander(Grafo grafo, int aluno) {
         iterador = fila.front();
         fila.pop_front();
 
-        if (liderMaisNovo == -1) {
-            liderMaisNovo = iterador;
-            menorIdade = grafo.adjacencias[iterador].idade;
-        } else if (grafo.adjacencias[iterador].idade < menorIdade) {
+        if (liderMaisNovo == -1 || grafo.adjacencias[iterador].idade < menorIdade) {
             liderMaisNovo = iterador;
             menorIdade = grafo.adjacencias[iterador].idade;
         }
@@ -40,7 +37,6 @@ void commander(Grafo grafo, int aluno) {
         for (auto i : transposto.adjacencias[iterador].comandados) {
             if (!visitado[i]) {
                 visitado[i] = true;
-
                 fila.push_back(i);
             }
         }
