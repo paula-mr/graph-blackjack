@@ -93,6 +93,8 @@ void meeting(Grafo grafo) {
     inicializarVisitados(visitado, grafo.tamanho);
     iniciarPilha(visitado, grafo, &pilha);
 
+    std::cout << "M ";
+
     imprimirPilha(&pilha);
 
 }
@@ -161,7 +163,7 @@ void commander(Grafo grafo, int aluno) {
     if (liderMaisNovo == -1 || liderMaisNovo == aluno) {
         std::cout << "C *" << endl;
     } else {
-        std::cout << "C " << liderMaisNovo << endl;
+        std::cout << "C " << grafo.adjacencias[liderMaisNovo].idade << endl;
     }
 }
 

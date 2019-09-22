@@ -34,8 +34,6 @@ int main(int argc, char *argv[]) {
     Grafo grafo = Grafo(qtdPessoas, pessoas);
     receberRelacionamentos(grafo, arquivo, qtdRelacoes);
 
-    grafo.imprimir();
-
     receberComandos(grafo, arquivo, qtdInstrucoes);
 
     return 0;
