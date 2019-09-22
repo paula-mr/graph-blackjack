@@ -133,13 +133,15 @@ void imprimirPilha(stack<int>* pilha) {
 }
 
 void commander(Grafo grafo, int aluno) {
-    int liderMaisNovo = -1, menorIdade = 1000;
+    int liderMaisNovo = -1, menorIdade;
     bool visitado[grafo.tamanho];
     list<int> fila;
     Pessoa pessoas[grafo.tamanho+1];
-    Grafo transposto = Grafo(grafo.tamanho, pessoas);
 
+    //inverte o grafo
+    Grafo transposto = Grafo(grafo.tamanho, pessoas);
     inverterGrafo(grafo, transposto, grafo.tamanho+1);
+
     inicializarVisitados(visitado, grafo.tamanho);
     visitado[aluno] = true;
 
@@ -150,11 +152,13 @@ void commander(Grafo grafo, int aluno) {
         iterador = fila.front();
         fila.pop_front();
 
+        //verifica se o aluno atual eh mais novo que o lider cadastrado
         if (liderMaisNovo == -1 || grafo.adjacencias[iterador].idade < menorIdade) {
             liderMaisNovo = iterador;
             menorIdade = grafo.adjacencias[iterador].idade;
         }
 
+        //adiciona os comandados que ainda nao foram visitados do aluno atual
         for (auto i : transposto.adjacencias[iterador].comandados) {
             if (!visitado[i]) {
                 visitado[i] = true;
