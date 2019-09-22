@@ -19,9 +19,11 @@ void realizarTroca(Grafo grafo, int aluno1, int aluno2);
 void swap(Grafo grafo, int aluno1, int aluno2) {
     int comandante, comandado;
 
+    //verifica se o aluno2 esta contido na lista de comandados do aluno1
     if (contem(grafo.adjacencias[aluno1].comandados, aluno2)) {
         comandante = aluno1;
         comandado = aluno2;
+    //verifica se o aluno1 esta contido na lista de comandados do aluno2
     } else if (contem(grafo.adjacencias[aluno2].comandados, aluno1)) {
         comandante = aluno2;
         comandado = aluno1;
@@ -33,6 +35,7 @@ void swap(Grafo grafo, int aluno1, int aluno2) {
     realizarTroca(grafo, comandante, comandado);
 
     if (verificarCiclo(grafo)) {
+        //destroca comandante com comandado caso a troca cause um ciclo
         realizarTroca(grafo, comandado, comandante);
         std::cout << "S N" << std::endl;
     } else {
@@ -45,6 +48,7 @@ void realizarTroca(Grafo grafo, int aluno1, int aluno2) {
     grafo.adicionarAdjacencia(aluno2, aluno1);
 }
 
+//verifica se o item esta contido na lista
 bool contem(vector<int> lista, int item) {
     for (auto i : lista) {
         if (i == item)
