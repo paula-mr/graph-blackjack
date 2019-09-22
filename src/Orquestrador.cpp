@@ -11,7 +11,7 @@
 
 void inicializarVisitados(bool* visitado, int tamanho);
 void inserirPilhaTopologica(int aluno, bool* visitado, Grafo grafo, stack<int>* pilha);
-void iniciarPilha(bool* visitado, Grafo grafo, stack<int>* pilha);
+void inicializarPilha(bool* visitado, Grafo grafo, stack<int>* pilha);
 void imprimirPilha(stack<int>* pilha);
 bool verificarCiclo(Grafo grafo);
 bool verificarVerticesAdjacentes(int aluno, bool* visitado, bool* pilhaRecursao, Grafo grafo);
@@ -97,7 +97,7 @@ void meeting(Grafo grafo) {
     bool visitado[grafo.tamanho];
 
     inicializarVisitados(visitado, grafo.tamanho);
-    iniciarPilha(visitado, grafo, &pilha);
+    inicializarPilha(visitado, grafo, &pilha);
 
     std::cout << "M ";
 
@@ -105,7 +105,7 @@ void meeting(Grafo grafo) {
 
 }
 
-void iniciarPilha(bool* visitado, Grafo grafo, stack<int>* pilha) {
+void inicializarPilha(bool* visitado, Grafo grafo, stack<int>* pilha) {
     for (int i=1; i < grafo.tamanho+1; i++) {
         if (!visitado[i]) {
             inserirPilhaTopologica(i, visitado, grafo, pilha);
