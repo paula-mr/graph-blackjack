@@ -92,7 +92,7 @@ void commander(Grafo grafo, int aluno) {
         fila.pop_front();
 
         //verifica se o aluno atual eh mais novo que o lider cadastrado
-        if (liderMaisNovo == -1 || grafo.time[iterador].idade < menorIdade) {
+        if (iterador != aluno && (liderMaisNovo == -1 || grafo.time[iterador].idade < menorIdade)) {
             liderMaisNovo = iterador;
             menorIdade = grafo.time[iterador].idade;
         }
@@ -107,7 +107,7 @@ void commander(Grafo grafo, int aluno) {
     }
 
 
-    if (liderMaisNovo == -1 || liderMaisNovo == aluno) {
+    if (liderMaisNovo == -1) {
         std::cout << "C *" << endl;
     } else {
         std::cout << "C " << grafo.time[liderMaisNovo].idade << endl;
