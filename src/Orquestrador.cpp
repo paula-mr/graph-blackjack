@@ -183,8 +183,8 @@ void inicializarVisitados(bool* visitado, int tamanho) {
 
 void inverterGrafo(Grafo grafo, Grafo transposto)  {
     for (int i = 1; i < grafo.tamanho+1; i++) {
-        for (unsigned int j = 0; j < grafo.time[i].comandados.size(); j++) {
-            transposto.adicionarAdjacencia(grafo.time[i].comandados[j], i);
+        for (auto j : grafo.time[i].comandados) {
+            transposto.adicionarAdjacencia(j, i);
         }
 
     }
