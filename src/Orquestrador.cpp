@@ -65,7 +65,7 @@ void meeting(Grafo grafo) {
     bool visitado[grafo.tamanho];
     inicializarVisitados(visitado, grafo.tamanho);
 
-    grafo.inicializarPilha(visitado, &pilha);
+    grafo.inicializarPilhaTopologica(visitado, &pilha);
 
     std::cout << "M ";
 

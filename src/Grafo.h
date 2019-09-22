@@ -20,8 +20,8 @@ class Grafo {
         void removerAdjacencia(int u, int v);
         void inverterGrafo(Grafo transposto);
         bool verificarCiclo(bool* visitado, bool* pilhaRecursao);
-        bool verificarVerticesAdjacentes(int aluno, bool* visitado, bool* pilhaRecursao);
-        void inicializarPilha(bool* visitado, stack<int>* pilha);
+        bool verificarRecorrenciaVerticesAdjacentes(int aluno, bool* visitado, bool* pilhaRecursao);
+        void inicializarPilhaTopologica(bool* visitado, stack<int>* pilha);
         void inserirPilhaTopologica(int aluno, bool* visitado, stack<int>* pilha);
 };
 

@@ -3,13 +3,15 @@
 #include "Orquestrador.h"
 
 FILE* abrirArquivo(int argc, char *argv[]);
+int recuperarNumero(FILE* arquivo);
+char recuperarChar(FILE* arquivo);
+
 void receberPessoas(Pessoa pessoas[], FILE* arquivo, int qtdPessoas);
 void receberRelacionamentos(Grafo grafo, FILE* arquivo, int qtdRelacoes);
 void receberComandos(Grafo grafo, FILE* arquivo, int qtdInstrucoes);
+
 void executarCommander(Grafo grafo, FILE* arquivo);
 void executarSwap(Grafo grafo, FILE* arquivo);
-int recuperarNumero(FILE* arquivo);
-char recuperarChar(FILE* arquivo);
 
 int main(int argc, char *argv[]) {
 
