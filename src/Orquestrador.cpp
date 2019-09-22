@@ -6,7 +6,7 @@
 #include <algorithm>
 #include "Pessoa.h"
 
-void inverterGrafo(Grafo grafo, Grafo transposto, int tamanho);
+void inverterGrafo(Grafo grafo, Grafo transposto);
 void inicializarVisitados(bool* visitado, int tamanho);
 void inserirPilhaTopologica(int aluno, bool* visitado, Grafo grafo, stack<int>* pilha);
 void iniciarPilha(bool* visitado, Grafo grafo, stack<int>* pilha);
@@ -140,7 +140,7 @@ void commander(Grafo grafo, int aluno) {
 
     //inverte o grafo
     Grafo transposto = Grafo(grafo.tamanho, pessoas);
-    inverterGrafo(grafo, transposto, grafo.tamanho+1);
+    inverterGrafo(grafo, transposto);
 
     inicializarVisitados(visitado, grafo.tamanho);
     visitado[aluno] = true;
@@ -181,8 +181,8 @@ void inicializarVisitados(bool* visitado, int tamanho) {
     }
 }
 
-void inverterGrafo(Grafo grafo, Grafo transposto, int tamanho)  {
-    for (int i = 1; i < tamanho; i++) {
+void inverterGrafo(Grafo grafo, Grafo transposto)  {
+    for (int i = 1; i < grafo.tamanho+1; i++) {
         for (unsigned int j = 0; j < grafo.time[i].comandados.size(); j++) {
             transposto.adicionarAdjacencia(grafo.time[i].comandados[j], i);
         }
