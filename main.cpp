@@ -2,6 +2,7 @@
 #include "Pessoa.h"
 #include "Orquestrador.h"
 
+FILE* abrirArquivo(int argc, char *argv[]);
 void receberPessoas(Pessoa pessoas[], FILE* arquivo, int qtdPessoas);
 void receberRelacionamentos(Grafo grafo, FILE* arquivo, int qtdRelacoes);
 void receberComandos(Grafo grafo, FILE* arquivo, int qtdInstrucoes);
@@ -12,17 +13,11 @@ char recuperarChar(FILE* arquivo);
 
 int main(int argc, char *argv[]) {
 
-    int qtdPessoas, qtdRelacoes, qtdInstrucoes;
-
-    if (argc < 2) {
-        std::cout << "Parâmetro inválido.";
-        return 1;
-    }
-    char* nomeArquivo = argv[1];
-
-    FILE* arquivo = fopen(nomeArquivo, "r");
+    FILE* arquivo = abrirArquivo(argc, argv);
     if (arquivo == NULL)
         return 1;
+
+    int qtdPessoas, qtdRelacoes, qtdInstrucoes;
 
     qtdPessoas = recuperarNumero(arquivo);
     qtdRelacoes = recuperarNumero(arquivo);
@@ -37,6 +32,19 @@ int main(int argc, char *argv[]) {
     receberComandos(grafo, arquivo, qtdInstrucoes);
 
     return 0;
+}
+
+FILE* abrirArquivo(int argc, char *argv[]) {
+    if (argc < 2) {
+        std::cout << "Parâmetro inválido.";
+        return NULL;
+    }
+
+    char* nomeArquivo = argv[1];
+
+    FILE* arquivo = fopen(nomeArquivo, "r");
+
+    return arquivo;
 }
 
 char recuperarChar(FILE* arquivo) {
