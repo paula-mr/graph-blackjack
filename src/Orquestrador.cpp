@@ -20,11 +20,11 @@ void swap(Grafo grafo, int aluno1, int aluno2) {
     int comandante, comandado;
 
     //verifica se o aluno2 esta contido na lista de comandados do aluno1
-    if (contem(grafo.adjacencias[aluno1].comandados, aluno2)) {
+    if (contem(grafo.time[aluno1].comandados, aluno2)) {
         comandante = aluno1;
         comandado = aluno2;
     //verifica se o aluno1 esta contido na lista de comandados do aluno2
-    } else if (contem(grafo.adjacencias[aluno2].comandados, aluno1)) {
+    } else if (contem(grafo.time[aluno2].comandados, aluno1)) {
         comandante = aluno2;
         comandado = aluno1;
     } else {
@@ -78,7 +78,7 @@ bool verificarVerticesAdjacentes(int aluno, bool* visitado, bool* pilhaRecursao,
         visitado[aluno] = true;
         pilhaRecursao[aluno] = true;
 
-        for (auto i : grafo.adjacencias[aluno].comandados) {
+        for (auto i : grafo.time[aluno].comandados) {
             if ((!visitado[i] && verificarVerticesAdjacentes(i, visitado, pilhaRecursao, grafo)) || pilhaRecursao[i]) {
                 return true;
             }
@@ -114,7 +114,7 @@ void iniciarPilha(bool* visitado, Grafo grafo, stack<int>* pilha) {
 void inserirPilhaTopologica(int aluno, bool* visitado, Grafo grafo, stack<int>* pilha) {
     visitado[aluno] = true;
 
-    for (auto i : grafo.adjacencias[aluno].comandados) {
+    for (auto i : grafo.time[aluno].comandados) {
         if (!visitado[i]) {
             inserirPilhaTopologica(i, visitado, grafo, pilha);
         }
@@ -153,13 +153,13 @@ void commander(Grafo grafo, int aluno) {
         fila.pop_front();
 
         //verifica se o aluno atual eh mais novo que o lider cadastrado
-        if (liderMaisNovo == -1 || grafo.adjacencias[iterador].idade < menorIdade) {
+        if (liderMaisNovo == -1 || grafo.time[iterador].idade < menorIdade) {
             liderMaisNovo = iterador;
-            menorIdade = grafo.adjacencias[iterador].idade;
+            menorIdade = grafo.time[iterador].idade;
         }
 
         //adiciona os comandados que ainda nao foram visitados do aluno atual
-        for (auto i : transposto.adjacencias[iterador].comandados) {
+        for (auto i : transposto.time[iterador].comandados) {
             if (!visitado[i]) {
                 visitado[i] = true;
                 fila.push_back(i);
@@ -171,7 +171,7 @@ void commander(Grafo grafo, int aluno) {
     if (liderMaisNovo == -1 || liderMaisNovo == aluno) {
         std::cout << "C *" << endl;
     } else {
-        std::cout << "C " << grafo.adjacencias[liderMaisNovo].idade << endl;
+        std::cout << "C " << grafo.time[liderMaisNovo].idade << endl;
     }
 }
 
@@ -183,8 +183,8 @@ void inicializarVisitados(bool* visitado, int tamanho) {
 
 void inverterGrafo(Grafo grafo, Grafo transposto, int tamanho)  {
     for (int i = 1; i < tamanho; i++) {
-        for (unsigned int j = 0; j < grafo.adjacencias[i].comandados.size(); j++) {
-            transposto.adicionarAdjacencia(grafo.adjacencias[i].comandados[j], i);
+        for (unsigned int j = 0; j < grafo.time[i].comandados.size(); j++) {
+            transposto.adicionarAdjacencia(grafo.time[i].comandados[j], i);
         }
 
     }

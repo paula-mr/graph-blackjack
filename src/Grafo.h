@@ -12,9 +12,9 @@ class Grafo {
 
     public:
         int tamanho;
-        Pessoa* adjacencias;
+        Pessoa* time;
 
-        Grafo(int n, Pessoa* adjacencias);
+        Grafo(int n, Pessoa* time);
         ~Grafo();
         void adicionarAdjacencia(int u, int v);
         void removerAdjacencia(int u, int v);
