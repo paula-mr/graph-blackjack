@@ -78,8 +78,8 @@ void commander(Grafo grafo, int aluno) {
     Pessoa pessoas[grafo.tamanho+1];
 
     //inverte o grafo
-    Grafo transposto = Grafo(grafo.tamanho, pessoas);
-    grafo.inverterGrafo(transposto);
+    Grafo invertido = Grafo(grafo.tamanho, pessoas);
+    grafo.inverter(invertido);
 
     inicializarVisitados(visitado, grafo.tamanho);
     visitado[aluno] = true;
@@ -98,7 +98,7 @@ void commander(Grafo grafo, int aluno) {
         }
 
         //adiciona os comandados que ainda nao foram visitados do aluno atual
-        for (auto i : transposto.time[iterador].comandados) {
+        for (auto i : invertido.time[iterador].comandados) {
             if (!visitado[i]) {
                 visitado[i] = true;
                 fila.push_back(i);
