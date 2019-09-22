@@ -18,4 +18,13 @@ void Grafo::removerAdjacencia(int u, int v) {
     time[u].comandados.erase(std::remove(time[u].comandados.begin(), time[u].comandados.end(), v), time[u].comandados.end());
 }
 
+void Grafo::inverterGrafo(Grafo transposto)  {
+    for (int i = 1; i < this->tamanho+1; i++) {
+        for (auto j : this->time[i].comandados) {
+            transposto.adicionarAdjacencia(j, i);
+        }
+
+    }
+}
+
 #endif

@@ -18,7 +18,7 @@ class Grafo {
         ~Grafo();
         void adicionarAdjacencia(int u, int v);
         void removerAdjacencia(int u, int v);
-        void imprimir();
+        void inverterGrafo(Grafo transposto);
 };
 
 #endif
