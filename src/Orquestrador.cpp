@@ -2,27 +2,26 @@
 #define ORQUESTRADOR_CPP
 
 #include "Orquestrador.h"
+#include "Pessoa.h"
 
 #include <stack>
 #include <list>
 #include <iterator>
 #include <algorithm>
-#include "Pessoa.h"
 
 void inicializarVisitados(bool* visitado, int tamanho);
 void imprimirPilha(stack<int>* pilha);
-bool contem(vector<int> lista, int item);
 void realizarTroca(Grafo grafo, int aluno1, int aluno2);
 
 void swap(Grafo grafo, int aluno1, int aluno2) {
     int comandante, comandado;
 
     //verifica se o aluno2 esta contido na lista de comandados do aluno1
-    if (contem(grafo.time[aluno1].comandados, aluno2)) {
+    if (grafo.time[aluno1].comanda(aluno2)) {
         comandante = aluno1;
         comandado = aluno2;
     //verifica se o aluno1 esta contido na lista de comandados do aluno2
-    } else if (contem(grafo.time[aluno2].comandados, aluno1)) {
+    } else if (grafo.time[aluno2].comanda(aluno1)) {
         comandante = aluno2;
         comandado = aluno1;
     } else {
@@ -48,16 +47,6 @@ void swap(Grafo grafo, int aluno1, int aluno2) {
 void realizarTroca(Grafo grafo, int aluno1, int aluno2) {
     grafo.removerAdjacencia(aluno1, aluno2);
     grafo.adicionarAdjacencia(aluno2, aluno1);
-}
-
-//verifica se o item esta contido na lista
-bool contem(vector<int> lista, int item) {
-    for (auto i : lista) {
-        if (i == item)
-            return true;
-    }
-
-    return false;
 }
 
 void meeting(Grafo grafo) {
