@@ -10,11 +10,7 @@
 #include "Pessoa.h"
 
 void inicializarVisitados(bool* visitado, int tamanho);
-void inserirPilhaTopologica(int aluno, bool* visitado, Grafo grafo, stack<int>* pilha);
-void inicializarPilha(bool* visitado, Grafo grafo, stack<int>* pilha);
 void imprimirPilha(stack<int>* pilha);
-bool verificarCiclo(Grafo grafo);
-bool verificarVerticesAdjacentes(int aluno, bool* visitado, bool* pilhaRecursao, Grafo grafo);
 bool contem(vector<int> lista, int item);
 void realizarTroca(Grafo grafo, int aluno1, int aluno2);
 
@@ -36,7 +32,11 @@ void swap(Grafo grafo, int aluno1, int aluno2) {
 
     realizarTroca(grafo, comandante, comandado);
 
-    if (verificarCiclo(grafo)) {
+    bool visitado[grafo.tamanho], pilhaRecursao[grafo.tamanho];
+    inicializarVisitados(visitado, grafo.tamanho);
+    inicializarVisitados(pilhaRecursao, grafo.tamanho);
+
+    if (grafo.verificarCiclo(visitado, pilhaRecursao)) {
         //destroca comandante com comandado caso a troca cause um ciclo
         realizarTroca(grafo, comandado, comandante);
         std::cout << "S N" << std::endl;
@@ -60,69 +60,17 @@ bool contem(vector<int> lista, int item) {
     return false;
 }
 
-bool verificarCiclo(Grafo grafo) {
-    bool visitado[grafo.tamanho], pilhaRecursao[grafo.tamanho];
-
-    inicializarVisitados(visitado, grafo.tamanho);
-    inicializarVisitados(pilhaRecursao, grafo.tamanho);
-
-    for (int i=0; i < grafo.tamanho; i++) {
-        if (verificarVerticesAdjacentes(i+1, visitado, pilhaRecursao, grafo)) {
-            return true;
-        }
-    }
-
-    return false;
-}
-
-bool verificarVerticesAdjacentes(int aluno, bool* visitado, bool* pilhaRecursao, Grafo grafo) {
-    if (!visitado[aluno]) {
-        visitado[aluno] = true;
-        pilhaRecursao[aluno] = true;
-
-        for (auto i : grafo.time[aluno].comandados) {
-            if ((!visitado[i] && verificarVerticesAdjacentes(i, visitado, pilhaRecursao, grafo)) || pilhaRecursao[i]) {
-                return true;
-            }
-        }
-
-    }
-
-    pilhaRecursao[aluno] = false;
-    return false;
-}
-
 void meeting(Grafo grafo) {
     stack<int> pilha;
     bool visitado[grafo.tamanho];
-
     inicializarVisitados(visitado, grafo.tamanho);
-    inicializarPilha(visitado, grafo, &pilha);
+
+    grafo.inicializarPilha(visitado, &pilha);
 
     std::cout << "M ";
 
     imprimirPilha(&pilha);
 
-}
-
-void inicializarPilha(bool* visitado, Grafo grafo, stack<int>* pilha) {
-    for (int i=1; i < grafo.tamanho+1; i++) {
-        if (!visitado[i]) {
-            inserirPilhaTopologica(i, visitado, grafo, pilha);
-        }
-    }
-}
-
-void inserirPilhaTopologica(int aluno, bool* visitado, Grafo grafo, stack<int>* pilha) {
-    visitado[aluno] = true;
-
-    for (auto i : grafo.time[aluno].comandados) {
-        if (!visitado[i]) {
-            inserirPilhaTopologica(i, visitado, grafo, pilha);
-        }
-    }
-
-    pilha->push(aluno);
 }
 
 void imprimirPilha(stack<int>* pilha) {

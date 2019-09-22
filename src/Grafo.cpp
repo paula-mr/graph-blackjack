@@ -27,4 +27,53 @@ void Grafo::inverterGrafo(Grafo transposto)  {
     }
 }
 
+
+bool Grafo::verificarCiclo(bool* visitado, bool* pilhaRecursao) {
+
+    for (int i=0; i < this->tamanho; i++) {
+        if (verificarVerticesAdjacentes(i+1, visitado, pilhaRecursao)) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+bool Grafo::verificarVerticesAdjacentes(int aluno, bool* visitado, bool* pilhaRecursao) {
+    if (!visitado[aluno]) {
+        visitado[aluno] = true;
+        pilhaRecursao[aluno] = true;
+
+        for (auto i : this->time[aluno].comandados) {
+            if ((!visitado[i] && verificarVerticesAdjacentes(i, visitado, pilhaRecursao)) || pilhaRecursao[i]) {
+                return true;
+            }
+        }
+
+    }
+
+    pilhaRecursao[aluno] = false;
+    return false;
+}
+
+void Grafo::inicializarPilha(bool* visitado, stack<int>* pilha) {
+    for (int i=1; i < this->tamanho+1; i++) {
+        if (!visitado[i]) {
+            inserirPilhaTopologica(i, visitado, pilha);
+        }
+    }
+}
+
+void Grafo::inserirPilhaTopologica(int aluno, bool* visitado, stack<int>* pilha) {
+    visitado[aluno] = true;
+
+    for (auto i : this->time[aluno].comandados) {
+        if (!visitado[i]) {
+            inserirPilhaTopologica(i, visitado, pilha);
+        }
+    }
+
+    pilha->push(aluno);
+}
+
 #endif
