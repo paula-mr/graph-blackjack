@@ -33,6 +33,8 @@ int main(int argc, char *argv[]) {
 
     receberComandos(grafo, arquivo, qtdInstrucoes);
 
+	fclose(arquivo);
+
     return 0;
 }
 
